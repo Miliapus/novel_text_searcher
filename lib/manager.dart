@@ -29,9 +29,8 @@ class NovelManager {
     }
   }
   onceSearch(Novel novel,String key) async {
-    if(novel.file.path.contains("白衣")) {
-      final results = await novel.search(key);
-      delegate!.onOnceSearchFinish(novel, results);
-    }
+    print(novel.file.path);
+    final results = await novel.search(key);
+    delegate!.onOnceSearchFinish(novel, results);
   }
 }
