@@ -16,7 +16,6 @@ class Novel {
 
   FutureOr<List<String>> search(String key) async {
     final data = await _getCache();
-    print(data);
     final re = data.search(key, 20);
     return re;
   }
