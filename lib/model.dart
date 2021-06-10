@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-
+import 'package:novel_text_searcher/load.dart';
 class Novel {
   Novel(this.file);
 
@@ -9,9 +9,7 @@ class Novel {
 
   FutureOr<String> _getCache() async {
     if (_cache == null) {
-      // final data = await file.readAsBytes();
-      // _cache = utf8.decode(data.sublist(3));
-      _cache = await file.readAsString();
+      _cache = await file.read();
     }
     return _cache!;
   }
@@ -20,7 +18,6 @@ class Novel {
     final data = await _getCache();
     print(data);
     final re = data.search(key, 20);
-    print("re.length ${re.length}");
     return re;
   }
 }
@@ -28,7 +25,6 @@ class Novel {
 extension seach on String {
   List<String> search(String key, int targetLength) {
     final matches = key.allMatches(this);
-    print("matches ${matches.length}");
     final list = matches.toList();
     if (list.isEmpty) {
       return [];
