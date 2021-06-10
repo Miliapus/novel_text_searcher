@@ -61,19 +61,23 @@ extension load on File {
       }
       print("not match $path");
     }
-    return readBy([
-      utf8,
-      gbk,
-      readUTF16LE,
-    ]);
+    throw Exception("no correct reader method");
   }
 
   Future<String> read() async {
-    return readByReaders([
-      utf8Reader,
-      utf16leReader,
-      gbkReader,
-    ]);
+    try{
+      return readByReaders([
+        utf8Reader,
+        utf16leReader,
+        gbkReader,
+      ]);
+    } catch (e) {
+      return readBy([
+        utf8,
+        gbk,
+        readUTF16LE,
+      ]);
+    }
   }
 
   Future<String> readBy(List<dynamic> methods, {int from = 0}) async {
